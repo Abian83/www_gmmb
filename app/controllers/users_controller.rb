@@ -25,7 +25,9 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    #Save it in downcase always.
+    @user.email.downcase!
+    
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -54,11 +56,12 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html {
+          @user.destroy
+          redirect_to users_url, notice: 'User was successfully destroyed.' }
     end
+    # format.json { head :no_content }
   end
 
   private
@@ -69,6 +72,10 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :name, :email, :password, :email, :phone)
+      respond_to do |format|
+        format.html { params.require(:user).permit(:name, :email, :password, :phone) }
+        format.json { params.permit(:name, :email, :password, :phone) }
+      end
     end
+
 end
