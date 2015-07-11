@@ -2,12 +2,12 @@
 
 <p>
   <strong>From:</strong>
-  <%= @debt.from %>
+  <%= @debt.from_user.name if  @debt.from_user %>
 </p>
 
 <p>
   <strong>To:</strong>
-  <%= @debt.to %>
+  <%= @debt.to_user.name if  @debt.to_user %>
 </p>
 
 <p>
