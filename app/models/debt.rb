@@ -16,4 +16,5 @@ class Debt < ActiveRecord::Base
 		end
 	end
 
+
 end
