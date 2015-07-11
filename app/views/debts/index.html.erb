@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Id</th>
       <th>From</th>
       <th>To</th>
       <th>Quantity</th>
@@ -16,8 +17,9 @@
   <tbody>
     <% @debts.each do |debt| %>
       <tr>
-        <td><%= debt.from %></td>
-        <td><%= debt.to %></td>
+        <td><%= debt.id %></td>
+        <td><%= debt.from_user.name if debt.to_user %></td>
+        <td><%= debt.to_user.name if debt.to_user %></td>
         <td><%= debt.quantity %></td>
         <td><%= debt.description %></td>
         <td><%= link_to 'Show', debt %></td>
