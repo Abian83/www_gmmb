@@ -1,8 +1,20 @@
 Rails.application.routes.draw do
   resources :debts
 
-  resources :users
+  resources :users do
+    member do 
+      get 'total_debt'
+    end
+  end
 
+
+  #API routes
+  namespace :api do
+    namespace :v1 do
+      resources :debts
+      resources :users
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
