@@ -18,7 +18,7 @@
     <% @debts.each do |debt| %>
       <tr>
         <td><%= debt.id %></td>
-        <td><%= debt.from_user.name if debt.to_user %></td>
+        <td><%= debt.from_user.name if debt.from_user %></td>
         <td><%= debt.to_user.name if debt.to_user %></td>
         <td><%= debt.quantity %></td>
         <td><%= debt.description %></td>

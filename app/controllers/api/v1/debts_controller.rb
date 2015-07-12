@@ -1,5 +1,5 @@
 class Api::V1::DebtsController < Api::ApplicationController
-  #before_action :set_debt, only: [:show, :edit, :update, :destroy]
+  before_action :set_debt, only: [:update]
   before_action :get_user
 
   def index
@@ -16,6 +16,17 @@ class Api::V1::DebtsController < Api::ApplicationController
       render json: @debt.errors, status: :unprocessable_entity
     end
   end
+
+  # PATCH/PUT /api/v1/debts/1
+  #It is only allowed to update :quantity and :description.
+  def update
+      if @debt.update(params.permit(:quantity, :description))
+        render json: @debt 
+      else
+				render json: @debt.errors, status: :unprocessable_entity
+      end
+  end
+
 
   private
 

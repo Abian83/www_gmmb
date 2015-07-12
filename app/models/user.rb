@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 	validates_uniqueness_of :email, :case_sensitive => false
 	#Required fields
 	validates :name,:email,:password,:phone, presence: true
-	before_create :set_auth_token
+	before_create :set_auth_token, :normalize_user
 
 	private
 
@@ -21,5 +21,10 @@ class User < ActiveRecord::Base
     def set_auth_token
       return if api_token.present?
       self.api_token = generate_api_key
+    end
+
+    #Save the email in downcase always.
+    def normalize_user
+    	self.email.downcase! if self.email
     end
 end
