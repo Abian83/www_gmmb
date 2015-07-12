@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :contacts
+
   resources :debts
 
   resources :users do
@@ -13,6 +15,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :debts
       resources :users
+      resources :contacts
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
