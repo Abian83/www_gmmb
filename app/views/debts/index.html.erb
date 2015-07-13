@@ -6,8 +6,11 @@
   <thead>
     <tr>
       <th>Id</th>
-      <th>From</th>
-      <th>To</th>
+      <th>User</th>
+      <th>Contact</th>
+      <th>Type</th>
+      <th>Status</th>
+      <th>Created by</th>
       <th>Quantity</th>
       <th>Description</th>
       <th colspan="3"></th>
@@ -18,9 +21,11 @@
     <% @debts.each do |debt| %>
       <tr>
         <td><%= debt.id %></td>
-        <td><%= debt.from_user.name if debt.from_user %></td>
-        <td><%= debt.to_user.name if debt.to_user %></td>
-        <td><%= debt.quantity %></td>
+        <td><%= "#{debt.user.name}:#{debt.user.id}" if debt.user %></td>
+        <td><%= "#{debt.contact.name}:#{debt.contact.id}" if debt.contact %></td>
+        <td><%= debt.type %></td>
+        <td><%= debt.status %></td>
+        <td><%= debt.created_by %></td>
         <td><%= debt.description %></td>
         <td><%= link_to 'Show', debt %></td>
         <td><%= link_to 'Edit', edit_debt_path(debt) %></td>
