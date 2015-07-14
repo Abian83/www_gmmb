@@ -25,6 +25,10 @@ class DebtsController < ApplicationController
   # POST /debts.json
   def create
     @debt = Debt.new(debt_params)
+    @debt.status_pending!
+    @debt.type             = Debt.types[params[:debt][:type]]
+    @debt.user_id          = current_user.id
+    @debt.created_by_web!
 
     respond_to do |format|
       if @debt.save
@@ -70,8 +74,8 @@ class DebtsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def debt_params
       respond_to do |format|
-        format.html { params.require(:debt).permit(:from, :to, :quantity, :description) }
-        format.json { params.permit(:from, :to, :quantity, :description) }
+        format.html { params.require(:debt).permit(:contact_id, :type, :quantity, :description) }
+        format.json { params.permit(:contact_id, :type, :quantity, :description) }
       end
     end
 end
