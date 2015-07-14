@@ -30,6 +30,8 @@ gem "rails_config"
 #Enumerables
 gem 'simple_enum'
 
+#User authentication
+gem 'devise'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -51,5 +53,6 @@ group :development, :test do
   
   #For testing
   gem 'pry'
+  gem "awesome_print", require:"ap"
 end
 
