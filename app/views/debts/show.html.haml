@@ -1,0 +1,16 @@
+%p#notice= notice
+%p
+  %strong Contact:
+  = @debt.contact.name if  @debt.contact
+%p
+  %strong Type
+  = @debt.type
+%p
+  %strong Quantity:
+  = @debt.quantity
+%p
+  %strong Description:
+  = @debt.description
+= link_to 'Edit', edit_debt_path(@debt)
+|
+= link_to 'Back', debts_path

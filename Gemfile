@@ -32,6 +32,9 @@ gem 'simple_enum'
 
 #User authentication
 gem 'devise'
+
+#Views using haml
+gem "haml-rails", "~> 0.9"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
