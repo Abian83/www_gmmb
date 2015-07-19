@@ -1,27 +1,23 @@
-= form_for(@debt) do |f|
-  - if @debt.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@debt.errors.count, "error")
-        prohibited this debt from being saved:
-      %ul
-        - @debt.errors.full_messages.each do |message|
-          %li= message
-  .field
-    = f.label :contact_id
-    %br/
-    = f.text_field :contact_id
-  .field
-    = f.label :type
-    %br/
-    = f.text_field :type
-  .field
-    = f.label :quantity
-    %br/
-    = f.text_field :quantity
-  .field
-    = f.label :description
-    %br/
-    = f.text_field :description
-  .actions
-    = f.submit
+= form_for @debt, html: { class: "form form-horizontal debt" } do |f|
+  .form-group
+    = f.label :contact_id, class: 'control-label'
+    .controls
+      = f.text_field :contact_id, class: 'form-control', required: true
+    = error_span(@debt[:contact_id])
+  .form-group
+    = f.label :quantity, class: 'control-label'
+    .controls
+      = f.text_field :quantity, class: 'form-control', required: true
+    = error_span(@debt[:quantity])
+  .form-group
+    = f.label :description, class: 'control-label'
+    .controls
+      = f.text_field :description, class: 'form-control', required: true
+    = error_span(@debt[:description])
+  .form-group
+    = f.label :type_cd, class: 'control-label'
+    .controls
+      = f.text_field :type_cd, class: 'form-control', required: true
+    = error_span(@debt[:type_cd])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), debts_path, :class => 'btn btn-default'

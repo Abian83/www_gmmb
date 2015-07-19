@@ -1,29 +1,40 @@
-%p#notice= notice
-%h1 Listing Debts
-%table
+- model_class = Debt
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+%table.table.table-striped
   %thead
     %tr
-      %th Id
-      %th User
-      %th Contact
-      %th Type
-      %th Status
-      %th Created by
-      %th Quantity
-      %th Description
-      %th{:colspan => "3"}
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:user_id)
+      %th= model_class.human_attribute_name(:contact_id)
+      %th= model_class.human_attribute_name(:quantity)
+      %th= model_class.human_attribute_name(:description)
+      %th= model_class.human_attribute_name(:type_cd)
+      %th= model_class.human_attribute_name(:status_cd)
+      %th= model_class.human_attribute_name(:created_by_cd)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @debts.each do |debt|
       %tr
-        %td= debt.id
-        %td= "#{debt.user.name}:#{debt.user.id}" if debt.user
-        %td= "#{debt.contact.name}:#{debt.contact.id}" if debt.contact
-        %td= debt.type
-        %td= debt.status
-        %td= debt.created_by
+        %td= link_to debt.id, debt_path(debt)
+        %td= debt.user_id
+        %td= debt.contact_id
+        %td= debt.quantity
         %td= debt.description
-        %td= link_to 'Show', debt
-        %td= link_to 'Edit', edit_debt_path(debt)
-        %td= link_to 'Destroy', debt, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
-= link_to 'New Debt', new_debt_path
+        %td= debt.type_cd
+        %td= debt.status_cd
+        %td= debt.created_by_cd
+        %td=l debt.created_at
+        %td
+          = link_to edit_debt_path(debt) do
+            .btn.btn-default
+              = 'Edit'
+        %td
+          = link_to debt_path(debt), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } do
+            .btn.btn-danger
+              = 'Delete'
+
+= link_to :new_debt do
+  .btn.btn-primary
+    = 'Add Debt'

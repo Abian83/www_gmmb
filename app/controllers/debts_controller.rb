@@ -29,7 +29,6 @@ class DebtsController < ApplicationController
     @debt.type             = Debt.types[params[:debt][:type]]
     @debt.user_id          = current_user.id
     @debt.created_by_web!
-
     respond_to do |format|
       if @debt.save
         format.html { redirect_to @debt, notice: 'Debt was successfully created.' }
@@ -74,8 +73,8 @@ class DebtsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def debt_params
       respond_to do |format|
-        format.html { params.require(:debt).permit(:contact_id, :type, :quantity, :description) }
-        format.json { params.permit(:contact_id, :type, :quantity, :description) }
+        format.html { params.require(:debt).permit(:contact_id, :type_cd, :quantity, :description) }
+        format.json { params.permit(:contact_id, :type_cd, :quantity, :description) }
       end
     end
 end
