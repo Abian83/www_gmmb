@@ -61,5 +61,7 @@ group :development, :test do
   #For testing
   gem 'pry'
   gem "awesome_print", require:"ap"
+  #To generate dummy data
+  gem "faker"
 end
 
