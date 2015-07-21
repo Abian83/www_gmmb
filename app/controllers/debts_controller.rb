@@ -7,13 +7,14 @@ class DebtsController < ApplicationController
     @title = "All debts" 
     if params[:type] == Debt.types[:my_debt].to_s
       @title = "My debts"
-      @debts = Debt.type_my_debts.where(:user => current_user.id) 
+      @debts = Debt.type_my_debts.where(:user => current_user.id).includes(:contact).limit(50)
     elsif params[:type] == Debt.types[:my_debtor].to_s
       @title = "My debtors"
-      @debts = Debt.type_my_debtors.where(:user => current_user.id)
+      @debts = Debt.type_my_debtors.where(:user => current_user.id).includes(:contact).limit(50)
     else
-      @debts = Debt.all
-    end    
+      @debts = Debt.all.includes(:contact).limit(50)
+    end
+    @total = @debts.count
   end
 
   # GET /debts/1
