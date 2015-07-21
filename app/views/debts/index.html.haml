@@ -1,6 +1,6 @@
 - model_class = Debt
 .page-header
-  %h1=t '.title', :default => @title || "All debts"
+  %h1=t '.title', :default => "#{@title}(#{@total})" || "All debts(#{@total})"
 %table.table.table-striped
   %thead
     %tr
@@ -17,7 +17,7 @@
     - @debts.each do |debt|
       %tr
         %td= link_to debt.id, debt_path(debt)
-        %td= debt.contact.name if debt.contact 
+        %td= debt.contact.name if debt.contact
         %td= debt.quantity
         %td= debt.description
         %td= debt.type
