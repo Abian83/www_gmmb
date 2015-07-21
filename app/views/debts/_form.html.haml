@@ -1,5 +1,9 @@
 = form_for @debt, html: { class: "form form-horizontal debt" } do |f|
   .form-group
+    = f.label :type_cd, class: 'control-label'
+    .controls
+      = f.select(:type_cd,  [['From me', 0], ['To me', 1]])
+  .form-group
     = f.label :contact_id, class: 'control-label'
     .controls
       = f.text_field :contact_id, class: 'form-control', required: true
@@ -14,10 +18,6 @@
     .controls
       = f.text_field :description, class: 'form-control', required: true
     = error_span(@debt[:description])
-  .form-group
-    = f.label :type_cd, class: 'control-label'
-    .controls
-      = f.text_field :type_cd, class: 'form-control', required: true
-    = error_span(@debt[:type_cd])
+
   = f.submit nil,class: 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), debts_path, :class => 'btn btn-default'

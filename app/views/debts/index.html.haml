@@ -1,31 +1,29 @@
 - model_class = Debt
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h1=t '.title', :default => @title || "All debts"
 %table.table.table-striped
   %thead
     %tr
       %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:user_id)
       %th= model_class.human_attribute_name(:contact_id)
       %th= model_class.human_attribute_name(:quantity)
       %th= model_class.human_attribute_name(:description)
-      %th= model_class.human_attribute_name(:type_cd)
-      %th= model_class.human_attribute_name(:status_cd)
-      %th= model_class.human_attribute_name(:created_by_cd)
+      %th= model_class.human_attribute_name(:type)
+      %th= model_class.human_attribute_name(:status)
+      %th= model_class.human_attribute_name(:by)
       %th= model_class.human_attribute_name(:created_at)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @debts.each do |debt|
       %tr
         %td= link_to debt.id, debt_path(debt)
-        %td= debt.user_id
-        %td= debt.contact_id
+        %td= debt.contact.name if debt.contact 
         %td= debt.quantity
         %td= debt.description
-        %td= debt.type_cd
-        %td= debt.status_cd
-        %td= debt.created_by_cd
-        %td=l debt.created_at
+        %td= debt.type
+        %td= debt.status
+        %td= debt.created_by
+        %td= debt.created_at
         %td
           = link_to edit_debt_path(debt) do
             .btn.btn-default

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :contacts
   resources :debts
 
+  get "/debts/type/:type", to: "debts#index", as: "debt_type"
+
   #API routes
   namespace :api do
     namespace :v1 do

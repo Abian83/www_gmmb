@@ -44,8 +44,9 @@
               %h3 Menu
               %ul.nav.nav-list
                 -#%li.nav-header Options
-                %li= link_to "My Debts",    debts_path
-                %li= link_to "My Debtors",  debts_path
+                %li= link_to "My Debts",    debt_type_path(Debt.types[:my_debt])
+                %li= link_to "My Debtors",  debt_type_path(Debt.types[:my_debtor])
+                %li= link_to "All Debts",   debts_path
                 %li= link_to "Contacts",    contacts_path
         -else
           .col-lg-4

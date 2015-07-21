@@ -4,7 +4,16 @@ class DebtsController < ApplicationController
   # GET /debts
   # GET /debts.json
   def index
-    @debts = Debt.all
+    @title = "All debts" 
+    if params[:type] == Debt.types[:my_debt].to_s
+      @title = "My debts"
+      @debts = Debt.type_my_debts.where(:user => current_user.id) 
+    elsif params[:type] == Debt.types[:my_debtor].to_s
+      @title = "My debtors"
+      @debts = Debt.type_my_debtors.where(:user => current_user.id)
+    else
+      @debts = Debt.all
+    end    
   end
 
   # GET /debts/1
@@ -26,7 +35,7 @@ class DebtsController < ApplicationController
   def create
     @debt = Debt.new(debt_params)
     @debt.status_pending!
-    @debt.type             = Debt.types[params[:debt][:type]]
+    @debt.type             = Debt.types[params[:debt][:type_cd].to_i]
     @debt.user_id          = current_user.id
     @debt.created_by_web!
     respond_to do |format|
@@ -34,6 +43,7 @@ class DebtsController < ApplicationController
         format.html { redirect_to @debt, notice: 'Debt was successfully created.' }
         format.json { render :show, status: :created, location: @debt }
       else
+        flash[:error] =  @debt.errors.messages
         format.html { render :new }
         format.json { render json: @debt.errors, status: :unprocessable_entity }
       end
