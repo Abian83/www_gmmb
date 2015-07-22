@@ -6,7 +6,7 @@ class CreateDebts < ActiveRecord::Migration
       t.float 	:quantity,      null:false
       t.string 	:description,	  null:false, :limit => 200
       t.integer :type_cd,			  null:false
-      t.integer :state_cd,		  null:false
+      t.integer :status_cd,		  null:false
       t.integer :created_by_cd, null:false    
 
       t.timestamps null: false

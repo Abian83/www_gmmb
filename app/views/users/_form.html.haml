@@ -1,0 +1,63 @@
+= form_for @user, html: { class: "form form-horizontal user" } do |f|
+  .form-group
+    = f.label :name, class: 'control-label'
+    .controls
+      = f.text_field :name, class: 'form-control', required: true
+    = error_span(@user[:name])
+  .form-group
+    = f.label :email, class: 'control-label'
+    .controls
+      = f.text_field :email, class: 'form-control', required: true
+    = error_span(@user[:email])
+  .form-group
+    = f.label :phone, class: 'control-label'
+    .controls
+      = f.text_field :phone, class: 'form-control', required: true
+    = error_span(@user[:phone])
+  .form-group
+    = f.label :api_token, class: 'control-label'
+    .controls
+      = f.text_field :api_token, class: 'form-control', required: true
+    = error_span(@user[:api_token])
+  .form-group
+    = f.label :encrypted_password, class: 'control-label'
+    .controls
+      = f.text_field :encrypted_password, class: 'form-control', required: true
+    = error_span(@user[:encrypted_password])
+  .form-group
+    = f.label :reset_password_token, class: 'control-label'
+    .controls
+      = f.text_field :reset_password_token, class: 'form-control', required: true
+    = error_span(@user[:reset_password_token])
+  .form-group
+    = f.label :reset_password_sent_at, class: 'control-label'
+    .controls
+      = f.text_field :reset_password_sent_at, class: 'form-control', required: true
+    = error_span(@user[:reset_password_sent_at])
+  .form-group
+    = f.label :remember_created_at, class: 'control-label'
+    .controls
+      = f.text_field :remember_created_at, class: 'form-control', required: true
+    = error_span(@user[:remember_created_at])
+  .form-group
+    = f.label :current_sign_in_at, class: 'control-label'
+    .controls
+      = f.text_field :current_sign_in_at, class: 'form-control', required: true
+    = error_span(@user[:current_sign_in_at])
+  .form-group
+    = f.label :last_sign_in_at, class: 'control-label'
+    .controls
+      = f.text_field :last_sign_in_at, class: 'form-control', required: true
+    = error_span(@user[:last_sign_in_at])
+  .form-group
+    = f.label :current_sign_in_ip, class: 'control-label'
+    .controls
+      = f.text_field :current_sign_in_ip, class: 'form-control', required: true
+    = error_span(@user[:current_sign_in_ip])
+  .form-group
+    = f.label :last_sign_in_ip, class: 'control-label'
+    .controls
+      = f.text_field :last_sign_in_ip, class: 'form-control', required: true
+    = error_span(@user[:last_sign_in_ip])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), users_path, :class => 'btn btn-default'
