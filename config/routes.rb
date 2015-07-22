@@ -1,25 +1,23 @@
 Rails.application.routes.draw do
+  devise_for :users
+  resources :contacts
   resources :debts
 
-  resources :users do
-    member do 
-      get 'total_debt'
-    end
-  end
-
+  get "/debts/type/:type", to: "debts#index", as: "debt_type"
 
   #API routes
   namespace :api do
     namespace :v1 do
       resources :debts
       resources :users
+      resources :contacts
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'debts#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

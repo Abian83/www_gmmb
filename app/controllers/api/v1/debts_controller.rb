@@ -3,13 +3,22 @@ class Api::V1::DebtsController < Api::ApplicationController
   before_action :get_user
 
   def index
-    @debts = Debt.where(from: @user.id ) + Debt.where(to: @user.id )
+    @debts = Debt.where(user_id: @user.id )
     render json: @debts
   end
 
+  #Debt:1 user_id:1 contact_id:1 type:'debo|me deben' quantity:5 description:'Bocadillo que me compré' 
+  #state:sincronized|pending created_by:web|mobile
+  
   # POST /api/v1/debts
   def create
-    @debt = Debt.new(debt_params)
+    #TODO: Refactor 
+    @debt                  = Debt.new(debt_params)
+    @debt.status_pending!
+    @debt.type             = Debt.types[params[:type]]
+    @debt.user_id          = @user.id
+    @debt.created_by_api!
+
     if @debt.save
       render json: @debt
     else
@@ -27,7 +36,6 @@ class Api::V1::DebtsController < Api::ApplicationController
       end
   end
 
-
   private
 
   	def get_user
@@ -41,7 +49,7 @@ class Api::V1::DebtsController < Api::ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def debt_params
-    	params.permit(:from, :to, :quantity, :description)
+    	params.permit(:contact_id, :type, :quantity, :description)
     end
 
 

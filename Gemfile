@@ -27,6 +27,14 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 #Settings files
 gem "rails_config"
 
+#Enumerables
+gem 'simple_enum'
+
+#User authentication
+gem 'devise'
+
+#Views using haml
+gem "haml-rails", "~> 0.9"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -35,6 +43,10 @@ gem "rails_config"
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem "therubyracer"
+gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+gem "twitter-bootstrap-rails"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -48,5 +60,8 @@ group :development, :test do
   
   #For testing
   gem 'pry'
+  gem "awesome_print", require:"ap"
+  #To generate dummy data
+  gem "faker"
 end
 

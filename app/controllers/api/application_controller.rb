@@ -1,5 +1,16 @@
 class Api::ApplicationController < ApplicationController
 	before_action :authenticate
+	
+	#Format the response message
+	def format_response(response, errNumb=0  )
+		{
+	   isError:  !response.errors.empty?,
+	   errDesc: response.errors.empty? ? '' : response.errors.messages,
+	   errNumb: errNumb,
+	   response: response
+		}
+	end
+
 
 	protected
 		def authenticate
@@ -15,3 +26,5 @@ class Api::ApplicationController < ApplicationController
 			request.post? && action_name == 'create' && controller_name == "users"
 		end
 end
+
+

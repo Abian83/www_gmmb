@@ -1,0 +1,6 @@
+-flash.each do |key, value|
+	.container.alert{:class => "alert-#{key}"}
+		%a{'data-dismiss' => 'alert'}
+			%ul
+				%li
+					%span= value
