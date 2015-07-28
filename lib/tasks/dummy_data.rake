@@ -3,7 +3,9 @@ namespace :dummy_data do
   desc "Generate some Users/Contacts/Debts for testing purposes"
   task generate: :environment do
 
-  	return if Rails.env.production?
+    #TODO: reactivate this when the app will be in a real production env
+  	#return if Rails.env.production?
+    
   	#Before all deleta old data
   	puts "Deleting old data of User, Contact and Debt"
   	User.delete_all

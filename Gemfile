@@ -48,6 +48,10 @@ gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
 
+#To generate dummy data 
+#TODO: this should be in :development | :test group
+gem "faker"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -61,7 +65,6 @@ group :development, :test do
   #For testing
   gem 'pry'
   gem "awesome_print", require:"ap"
-  #To generate dummy data
-  gem "faker"
+
 end
 
