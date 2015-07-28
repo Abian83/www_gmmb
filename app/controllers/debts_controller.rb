@@ -15,6 +15,7 @@ class DebtsController < ApplicationController
       @debts = Debt.all.includes(:contact).limit(50)
     end
     @total = @debts.count
+    @total_price = @debts.sum(:quantity)
   end
 
   # GET /debts/1

@@ -34,12 +34,13 @@
             -else
               %li= link_to "Log in", new_session_path(resource_name)
     = render 'layouts/messages'
-    .container
+    .container-fluid
       .row
         -if user_signed_in?
-          .col-lg-9
+          .col-md-1
+          .col-md-9
             =yield
-          .col-lg-3
+          .col-md-2
             .well.sidebar-nav
               %h3 Menu
               %ul.nav.nav-list
