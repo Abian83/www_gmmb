@@ -26,6 +26,7 @@ class DebtsController < ApplicationController
   # GET /debts/new
   def new
     @debt = Debt.new
+    @contacts = Contact.all.limit(10).map{|x| { label:  x.name, id:  x.id} }.to_json
   end
 
   # GET /debts/1/edit
@@ -35,6 +36,7 @@ class DebtsController < ApplicationController
   # POST /debts
   # POST /debts.json
   def create
+    binding.pry
     @debt = Debt.new(debt_params)
     @debt.status_pending!
     @debt.type             = Debt.types[params[:debt][:type_cd].to_i]
@@ -55,6 +57,7 @@ class DebtsController < ApplicationController
   # PATCH/PUT /debts/1
   # PATCH/PUT /debts/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @debt.update(debt_params)
         format.html { redirect_to @debt, notice: 'Debt was successfully updated.' }

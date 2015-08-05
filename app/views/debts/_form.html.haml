@@ -6,7 +6,8 @@
   .form-group
     = f.label :contact_id, class: 'control-label'
     .controls
-      = f.text_field :contact_id, class: 'form-control', required: true
+      = text_field_tag :contact_value,      nil, class: 'form-control', required: true
+      = f.hidden_field :contact_id,    class: 'form-control', required: true
     = error_span(@debt[:contact_id])
   .form-group
     = f.label :quantity, class: 'control-label'
@@ -21,3 +22,15 @@
 
   = f.submit nil,class: 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), debts_path, :class => 'btn btn-default'
+
+:javascript
+  $(function() {
+      var contacts = #{@contacts}
+      $( "#contact_value" ).autocomplete({
+        source: contacts,
+        select: function (event, ui) {
+            $('#debt_contact_id').val(ui.item.id);
+            return false;
+        }
+      });
+    });
